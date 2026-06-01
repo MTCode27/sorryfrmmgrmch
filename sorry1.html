@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dear Swati — I'm Sorry 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=EB+Garamond:ital,wght@0,400;1,400&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --rose: #c0526d;
+    --rose-deep: #8b1a35;
+    --rose-light: #f7c0cf;
+    --blush: #fff0f3;
+    --petal: #fde8ed;
+    --gold: #d4a856;
+    --text-dark: #5a1a28;
+    --text-mid: #9a3a52;
+    --text-soft: #c27a8a;
+  }
+ 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+ 
+  html { scroll-behavior: smooth; }
+ 
+  body {
+    background: var(--blush);
+    font-family: 'Nunito', sans-serif;
+    color: var(--text-dark);
+    overflow-x: hidden;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ctext y='20' font-size='18'%3E🌸%3C/text%3E%3C/svg%3E") 12 12, auto;
+  }
+ 
+  /* ---- FLOATING PETALS ---- */
+  .petals-bg {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .petal {
+    position: absolute;
+    font-size: 20px;
+    opacity: 0;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0%   { opacity: 0; transform: translateY(-40px) rotate(0deg); }
+    10%  { opacity: 0.7; }
+    90%  { opacity: 0.5; }
+    100% { opacity: 0; transform: translateY(110vh) rotate(360deg); }
+  }
+ 
+  /* ---- HERO SECTION ---- */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    background: radial-gradient(ellipse at 50% 30%, #ffe4ed 0%, #ffd6e2 40%, #ffc8d8 100%);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='1.5' fill='%23d0607a' opacity='0.15'/%3E%3C/svg%3E") repeat;
+  }
+ 
+  .hero-badge {
+    font-size: 13px; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--rose); font-family: 'Nunito', sans-serif; font-weight: 600;
+    margin-bottom: 1rem;
+    animation: fadeUp 1s ease both;
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(72px, 15vw, 120px);
+    font-weight: 300; font-style: italic;
+    color: var(--rose-deep);
+    line-height: 1;
+    animation: fadeUp 1s 0.2s ease both;
+    text-shadow: 0 4px 24px rgba(139,26,53,0.15);
+  }
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(20px, 4vw, 28px);
+    font-style: italic; font-weight: 300;
+    color: var(--text-mid);
+    margin-top: 0.8rem;
+    animation: fadeUp 1s 0.4s ease both;
+    letter-spacing: 1px;
+  }
+  .hero-hearts {
+    font-size: 32px; letter-spacing: 12px; margin-top: 1.8rem;
+    animation: fadeUp 1s 0.6s ease both, heartbeat 2s 2s ease-in-out infinite;
+  }
+  @keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  .scroll-hint {
+    position: absolute; bottom: 2rem;
+    font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-soft); font-weight: 300;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+ 
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+ 
+  /* ---- SECTIONS ---- */
+  section {
+    position: relative; z-index: 1;
+    padding: 5rem 1.5rem;
+    max-width: 780px; margin: 0 auto;
+  }
+ 
+  .section-label {
+    font-size: 11px; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--rose); font-weight: 600;
+    margin-bottom: 0.6rem; text-align: center;
+  }
+ 
+  /* ---- SORRY CARD ---- */
+  .sorry-card {
+    background: white;
+    border-radius: 24px;
+    border: 1px solid #f5b8cb;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    box-shadow: 0 12px 60px rgba(192,82,109,0.12), 0 2px 8px rgba(192,82,109,0.06);
+    position: relative;
+    overflow: hidden;
+  }
+  .sorry-card::before {
+    content: '🌹';
+    position: absolute; top: -10px; left: -10px;
+    font-size: 80px; opacity: 0.06; transform: rotate(-20deg);
+  }
+  .sorry-card::after {
+    content: '🌹';
+    position: absolute; bottom: -10px; right: -10px;
+    font-size: 80px; opacity: 0.06; transform: rotate(20deg);
+  }
+  .sorry-big {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 10vw, 80px);
+    font-style: italic; font-weight: 600;
+    color: var(--rose-deep);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .sorry-line {
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--rose), transparent);
+    margin: 1rem auto;
+  }
+  .sorry-para {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px; font-style: italic; font-weight: 400;
+    color: var(--text-mid); line-height: 1.9;
+    max-width: 500px; margin: 0 auto;
+  }
+ 
+  /* ---- POEM ---- */
+  .poem-wrap {
+    background: linear-gradient(135deg, #fff5f8, #ffe8ef);
+    border-radius: 20px;
+    border-left: 4px solid var(--rose);
+    padding: 2.8rem 2.5rem;
+    box-shadow: 0 6px 30px rgba(192,82,109,0.09);
+  }
+  .poem-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 600; font-style: italic;
+    color: var(--rose-deep); margin-bottom: 1.5rem; text-align: center;
+  }
+  .poem-text {
+    font-family: 'EB Garamond', serif;
+    font-size: 18px; font-style: italic;
+    color: var(--text-dark); line-height: 2.2;
+    text-align: center;
+  }
+  .poem-stanza { margin-bottom: 1.6rem; }
+  .poem-stanza:last-child { margin-bottom: 0; }
+ 
+  /* ---- HINDI MESSAGE ---- */
+  .hindi-wrap {
+    background: white;
+    border-radius: 20px;
+    border: 1px solid #f5b8cb;
+    padding: 2.8rem 2.5rem;
+    text-align: center;
+    box-shadow: 0 6px 30px rgba(192,82,109,0.09);
+  }
+  .hindi-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 600; font-style: italic;
+    color: var(--rose-deep); margin-bottom: 1.5rem;
+  }
+  .hindi-text {
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px; font-weight: 300;
+    color: var(--text-mid); line-height: 2.4;
+  }
+  .hindi-highlight {
+    font-weight: 600; color: var(--rose-deep);
+  }
+ 
+  /* ---- REASONS ---- */
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.2rem; margin-top: 1.5rem;
+  }
+  .reason-card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid #f5b8cb;
+    padding: 1.6rem 1.2rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(192,82,109,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .reason-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(192,82,109,0.18);
+  }
+  .reason-icon { font-size: 32px; margin-bottom: 0.8rem; }
+  .reason-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; font-style: italic;
+    color: var(--text-mid); line-height: 1.6;
+  }
+ 
+  /* ---- PROMISE SECTION ---- */
+  .promise-wrap {
+    background: linear-gradient(135deg, #ffd6e2, #ffbdd0);
+    border-radius: 24px;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .promise-wrap::before {
+    content: '💕';
+    position: absolute; top: 20px; right: 20px;
+    font-size: 60px; opacity: 0.15;
+  }
+  .promise-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px; font-weight: 600; font-style: italic;
+    color: var(--rose-deep); margin-bottom: 1.2rem;
+  }
+  .promise-list {
+    list-style: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-style: italic;
+    color: var(--text-dark); line-height: 1;
+  }
+  .promise-list li {
+    padding: 0.7rem 0;
+    border-bottom: 1px dashed rgba(192,82,109,0.25);
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .promise-list li:last-child { border-bottom: none; }
+ 
+  /* ---- FOOTER ---- */
+  footer {
+    position: relative; z-index: 1;
+    text-align: center;
+    padding: 4rem 2rem 3rem;
+    background: linear-gradient(180deg, transparent, #ffd6e2);
+  }
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 8vw, 64px);
+    font-weight: 300; font-style: italic;
+    color: var(--rose-deep);
+    margin-bottom: 0.5rem;
+  }
+  .footer-msg {
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--text-soft); font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+  .footer-hearts { font-size: 28px; letter-spacing: 10px; }
+ 
+  /* ---- DIVIDER ---- */
+  .rose-divider {
+    text-align: center; font-size: 22px;
+    letter-spacing: 14px; color: var(--rose-light);
+    padding: 1rem 0; position: relative; z-index: 1;
+  }
+ 
+  /* ---- REVEAL ON SCROLL ---- */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1; transform: translateY(0);
+  }
+ 
+  /* ---- ENVELOPE OPEN ---- */
+  .envelope-btn {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.9rem 2.4rem;
+    background: var(--rose);
+    color: white;
+    border: none; border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px; font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(192,82,109,0.35);
+  }
+  .envelope-btn:hover {
+    background: var(--rose-deep);
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(139,26,53,0.4);
+  }
+ 
+  /* ---- MUSIC NOTE ---- */
+  .music-note {
+    position: fixed; bottom: 1.5rem; right: 1.5rem;
+    font-size: 30px; cursor: pointer; z-index: 99;
+    animation: spin-slow 4s linear infinite;
+    filter: drop-shadow(0 2px 6px rgba(192,82,109,0.5));
+  }
+  @keyframes spin-slow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+ 
+  @media (max-width: 600px) {
+    section { padding: 3rem 1rem; }
+    .sorry-card, .poem-wrap, .hindi-wrap, .promise-wrap { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+ 
+<!-- Floating petals -->
+<div class="petals-bg" id="petals"></div>
+ 
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">A message from the heart</div>
+  <div class="hero-name">Swati</div>
+  <div class="hero-subtitle">This page is made just for you 🌹</div>
+  <div class="hero-hearts">💕 🌸 💕</div>
+  <div class="scroll-hint">↓ scroll down ↓</div>
+</div>
+ 
+<div class="rose-divider">🌹 🌸 🌺 🌸 🌹</div>
+ 
+<!-- SORRY CARD -->
+<section>
+  <div class="sorry-card reveal">
+    <div class="section-label">From my heart to yours</div>
+    <div class="sorry-big">I'm Sorry</div>
+    <div class="sorry-line"></div>
+    <p class="sorry-para">
+      Swati, I know I made a mistake.<br/>
+      No words can fully express how sorry I feel,<br/>
+      but please know — hurting you was never my intention.<br/>
+      You mean the world to me. 💗
+    </p>
+    <button class="envelope-btn" onclick="document.getElementById('poem-section').scrollIntoView({behavior:'smooth'})">
+      💌 Read my letter
+    </button>
+  </div>
+</section>
+ 
+<div class="rose-divider">🌸 💕 🌸</div>
+ 
+<!-- ENGLISH POEM -->
+<section id="poem-section">
+  <div class="poem-wrap reveal">
+    <div class="section-label">English Poem</div>
+    <div class="poem-title">For You, Swati</div>
+    <div class="poem-text">
+      <div class="poem-stanza">
+        Like roses that wilt in the winter's cold air,<br/>
+        My heart aches with guilt beyond what I can bear.<br/>
+        I said words too harsh, I took the wrong way,<br/>
+        And I've thought of nothing but you since that day.
+      </div>
+      <div class="poem-stanza">
+        You're the laughter that lights up a room when you walk in,<br/>
+        The warmth that the coldest of mornings begin.<br/>
+        I was foolish, I stumbled, I let my pride speak,<br/>
+        But it's your forgiveness, Swati, that I humbly seek.
+      </div>
+      <div class="poem-stanza">
+        If I could go back, I'd choose silence instead,<br/>
+        Or fill every moment with kindness instead.<br/>
+        You deserve all the softness the whole world can give —<br/>
+        To love you and cherish you — that's how I want to live.
+      </div>
+      <div class="poem-stanza">
+        So here are my words, laid bare and true,<br/>
+        I'm deeply, sincerely sorry — Swati, it's you.<br/>
+        The one that I treasure, the one that I adore,<br/>
+        Please give me a chance, I won't hurt you anymore. 💕
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<div class="rose-divider">🌹 💗 🌹</div>
+ 
+<!-- HINDI MESSAGE -->
+<section>
+  <div class="hindi-wrap reveal">
+    <div class="section-label">Dil ki baat</div>
+    <div class="hindi-title">Swati ke liye</div>
+    <div class="hindi-text">
+      <span class="hindi-highlight">Swati,</span> tum meri zindagi mein kuch aisa hua ho<br/>
+      jo main words mein bayan nahi kar sakta. 🌸<br/><br/>
+ 
+      Jo hua, uske liye mujhe sachchi maafi maangni hai.<br/>
+      <span class="hindi-highlight">Mujhe maaf kar do.</span><br/><br/>
+ 
+      Main jaanta hoon ki maine galti ki,<br/>
+      aur shayad mere shabdon ne tumhe takleef di.<br/>
+      Par believe karo — tumhe hurt karna<br/>
+      kabhi mera irada nahi tha. 💕<br/><br/>
+ 
+      Tum mere liye bahut khaas ho Swati.<br/>
+      Tumhari hansi, tumhara pyaar, tumhara saath —<br/>
+      yeh sab mujhe <span class="hindi-highlight">duniya ki sabse badi daulat</span> lagti hai.<br/><br/>
+ 
+      Ek baar aur mauka do mujhe,<br/>
+      main wada karta hoon — <span class="hindi-highlight">tum muskurate rehna</span>,<br/>
+      aur main kabhi woh wajah nahi banunga<br/>
+      jo tumhare aankhon mein aansu laaye. 🌹<br/><br/>
+ 
+      <span class="hindi-highlight">Tumhara, hamesha. 💗</span>
+    </div>
+  </div>
+</section>
+ 
+<div class="rose-divider">🌸 🌺 🌸</div>
+ 
+<!-- WHY YOU ARE SPECIAL -->
+<section>
+  <div class="reveal" style="text-align:center; margin-bottom:1.5rem;">
+    <div class="section-label">Why you are special</div>
+    <div style="font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:600; font-style:italic; color:var(--rose-deep);">
+      Swati, You Are...
+    </div>
+  </div>
+  <div class="reasons-grid reveal">
+    <div class="reason-card">
+      <div class="reason-icon">🌸</div>
+      <div class="reason-text">As beautiful as the first flower of spring</div>
+    </div>
+    <div class="reason-card">
+      <div class="reason-icon">☀️</div>
+      <div class="reason-text">The sunshine that makes every day brighter</div>
+    </div>
+    <div class="reason-card">
+      <div class="reason-icon">💎</div>
+      <div class="reason-text">Rare, precious, and absolutely irreplaceable</div>
+    </div>
+    <div class="reason-card">
+      <div class="reason-icon">🌙</div>
+      <div class="reason-text">The calm of moonlight on the hardest nights</div>
+    </div>
+    <div class="reason-card">
+      <div class="reason-icon">🦋</div>
+      <div class="reason-text">Free-spirited and full of gentle grace</div>
+    </div>
+    <div class="reason-card">
+      <div class="reason-icon">🌹</div>
+      <div class="reason-text">Worth every single effort and apology in this world</div>
+    </div>
+  </div>
+</section>
+ 
+<div class="rose-divider">💕 🌸 💕</div>
+ 
+<!-- PROMISES -->
+<section>
+  <div class="promise-wrap reveal">
+    <div class="section-label">My promises to you</div>
+    <div class="promise-title">Wada Karta Hoon, Swati 🌹</div>
+    <ul class="promise-list">
+      <li>🌸 <span>I will always respect your feelings</span></li>
+      <li>💬 <span>I will communicate better, always</span></li>
+      <li>🤝 <span>I will be there for you — through every storm</span></li>
+      <li>😊 <span>I will be the reason you smile, not cry</span></li>
+      <li>💕 <span>I will love you with all that I have</span></li>
+      <li>🌹 <span>I will never let pride come between us again</span></li>
+    </ul>
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="rose-divider">🌹 🌸 🌹</div>
+  <br/>
+  <div class="footer-name">Swati 💗</div>
+  <div class="footer-msg">Always & Forever in my heart</div>
+  <div class="footer-hearts">💕 🌸 💕</div>
+  <br/><br/>
+  <p style="font-family:'Cormorant Garamond',serif; font-size:16px; font-style:italic; color:var(--text-soft);">
+    Made with love, sincerity, and a heart full of sorry. 🌹
+  </p>
+</footer>
+ 
+<div class="music-note" title="Made with love 💕">🌺</div>
+ 
+<script>
+  // Floating petals
+  const petalContainer = document.getElementById('petals');
+  const petalEmojis = ['🌸','🌺','💕','🌹','💗','🌷'];
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.textContent = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.top = '-40px';
+    p.style.fontSize = (14 + Math.random() * 16) + 'px';
+    p.style.animationDuration = (6 + Math.random() * 8) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    petalContainer.appendChild(p);
+  }
+ 
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
